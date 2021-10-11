@@ -1,0 +1,30 @@
+<div class="request-form">
+    <h1 class="mt-4">Request a XYZ</h1>
+
+    <form class="mt-4" [formGroup]="requestForm" *ngIf="!displaySuccessMessage">
+        <div class="col-md-6 col-xs-10 col-sm-10 m-auto mt-3">
+            <select class="form-control form-control-lg" formControlName="from">
+                <option value="">From</option>
+                <option *ngFor="let loc of locationList" [value]="loc">{{loc}}</option>
+              </select>
+        </div>
+        <div class="col-md-6 col-xs-10 col-sm-10 m-auto mt-3">
+            <select class="form-control form-control-lg" formControlName="to">
+                <option value="">To</option>
+                <option *ngFor="let loc of locationList" [value]="loc">{{loc}}</option>
+              </select>
+        </div>
+        <div class="col-md-6 col-xs-10 col-sm-10 m-auto mt-3">
+            <input class="form-control form-control-lg" formControlName="dateOfTrip" type="date" placeholder="Date of Journey">
+        </div>
+        <div class="col-md-6 col-xs-10 col-sm-10 m-auto mt-3">
+            <input class="form-control form-control-lg" formControlName="seats" type="number" min="1" max="4" value="1" placeholder="Seats">
+        </div>
+        <div class="col-md-6 col-xs-10 col-sm-10 m-auto mt-2">
+            <button (click)="submit()" class="btn btn-primary btn-lg w-100">Submit</button>
+        </div>
+    </form>
+    <div class="alert alert-success" role="alert" *ngIf="displaySuccessMessage">
+        Successfully created ride! Please click here to vew request.
+    </div>
+</div>
