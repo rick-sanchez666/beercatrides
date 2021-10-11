@@ -14,7 +14,6 @@ import { HeaderComponent } from './components/header/header.component';
 import { RideRequestComponent } from './components/ride-request/ride-request.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RidesComponent } from './components/rides/rides.component';
-import { AcceptedRidesComponent } from './components/accepted-rides/accepted-rides.component';
 
 const firebaseConfig = {
   apiKey: "AIzaSyAR5EPW82S9z4mj8xijtAt9Q_qtanA3EDI",
@@ -32,7 +31,6 @@ const firebaseConfig = {
     HeaderComponent,
     RideRequestComponent,
     RidesComponent,
-    AcceptedRidesComponent
   ],
   imports: [
     BrowserModule,

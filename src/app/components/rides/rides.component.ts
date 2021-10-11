@@ -14,7 +14,7 @@ export class RidesComponent implements OnInit {
   ngOnInit(): void {
     this.rideService.getAllRideRequest().subscribe((data: any[]) => {
       console.log(data)
-      this.rides = data.filter( r => r.accepted == false);
+      this.rides = data;
     })
   }
 
@@ -24,5 +24,6 @@ export class RidesComponent implements OnInit {
     console.log(res);
     console.log("send notification")
   }
+
 
 }

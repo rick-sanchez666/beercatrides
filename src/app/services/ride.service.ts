@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { switchMap } from 'rxjs/operators';
-import { IRideRequest, NewRide, RideRequest } from '../models/ride';
+import { IRideRequest, RideRequest } from '../models/ride';
 import { DbService } from './db.service';
+import { UserService } from './user.service';
 
 @Injectable({
   providedIn: 'root'
@@ -9,11 +10,11 @@ import { DbService } from './db.service';
 export class RideRequestService {
   private requestCollection = "rideRequest";
   private ridesCollection = "rides";
-  constructor(private db: DbService) { }
+  constructor(private db: DbService, private userService: UserService) { }
 
    newRequest(payload:any) {
-    let {from, to , seats, requestedBy, dateOfTrip} = payload;
-    let newReq = new RideRequest(from, to, dateOfTrip, seats, requestedBy);
+    let {from, to , seatsRequested, requestedBy, dateOfTrip} = payload;
+    let newReq = new RideRequest(from, to, dateOfTrip, seatsRequested, requestedBy);
     return this.db.createDoc(this.requestCollection, {...newReq});
   }
 
@@ -22,17 +23,17 @@ export class RideRequestService {
   }
 
   async acceptRide(payload:IRideRequest) {
-    let id = payload.id;
-    await this.acceptRequest(payload);
-    let newRide = new NewRide(true, 'tT52csVgvlopRHNVsId0', [id]);
-    return this.db.createDoc(this.ridesCollection, {...newRide});
-  }
-
-  private acceptRequest(payload:any) {
-    let id = payload.id;
-    delete payload.id;
-    payload.accepted = true;
-    return this.db.update(this.requestCollection, id, payload);
+    // get car details for total seats
+    let userInfo =  await (await this.userService.getUserInfo()).data() || {};
+    let p = {
+      accepted: true,
+      acceptedBy: 'tT52csVgvlopRHNVsId0',
+      seatsReserved: payload.seatsRequested,
+      totalSeatsAvailable: userInfo['myCars'][0].capacity,
+      passengers: [{user: payload.requestedBy, seatsReserved: payload.seatsRequested}]
+    }
+    console.log(p)
+    this.db.update(this.requestCollection, payload.id, p)
   }
 
   getAcceptedRides() {

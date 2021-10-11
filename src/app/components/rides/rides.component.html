@@ -1,15 +1,18 @@
 <div class="rides">
-    <h1 class="mt-4 mb-4">Ride Requests</h1>
+    <h1 class="mt-4 mb-4">XYZ Requests</h1>
     <div class="ride-list row">
         <div class="col-md-4 col-sm-2 col-xs-12 item " *ngFor="let r of rides">
             <div class="card text-center shadow p-3 mb-5 bg-body rounded">
                 <div class="card-header border-0">
-                  {{r.from}} ->  {{r.to}} <span class="badge bg-primary">new</span>
+                  {{r.from}} ->  {{r.to}} <span class="badge bg-primary" *ngIf="!r.accepted">new</span>
+                  <span class="badge bg-success" *ngIf="r.accepted">accepted</span>
                 </div>
                 <div class="card-body">
                   <h5 class="card-title"></h5>
-                  <p class="card-text">No of Passengers : {{r.seats}}</p>
-                  <a (click)="accept(r.id)" class="btn btn-success btn-md">Accept</a>
+                  <p class="card-text">No of Passengers : {{r.seatsRequested}}</p>
+                  <p class="card-text"*ngIf="r.totalSeatsAvailable" >No of Seats  : {{r.totalSeatsAvailable}}</p>
+                  <a (click)="accept(r.id)" class="btn btn-success btn-md" *ngIf="!r.accepted">Accept</a>
+                  <a (click)="accept(r.id)" class="btn btn-success btn-md" *ngIf="r.accepted && r.totalSeatsAvailable != r.seatsReserved">Request Fill in</a>
                 </div>
                 <div class="card-footer text-muted border-0">
                   {{r.dateOfTrip | date: 'dd-MMM-YYYY: HH:mm'}}

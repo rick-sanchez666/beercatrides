@@ -5,39 +5,29 @@ export interface IRideRequest {
     from: string;
     to: string;
     dateOfTrip: Date | string;
-    seats: number | string;
+    seatsRequested: number | string;
     requestedBy: string;
     accepted: boolean;
+    acceptedBy?: string;
+    seatsReserved?: string;
+    totalSeatsAvailable?:string;
+    passengers: any[];
+    bookingLog: []
 }
 
-export interface IRide {
-    id: string;
-    acceptedBy: IUser;
-    seatsReserved: string;
-    rideRequests: Array<IRideRequest>; 
-}
 
-export class NewRide {
-    accepted: boolean;
-    acceptedBy: string;
-    rideRequest: any[];
-    constructor( accepted:boolean, acceptedBy: string, requestId: any[]) {
-        this.accepted = accepted;
-        this.acceptedBy = acceptedBy;
-        this.rideRequest = requestId;
-    }
-}
+
 export class RideRequest {
     from: string;
     to: string;
     dateOfTrip: Date | string;
-    seats: number | string;
+    seatsRequested: number | string;
     requestedBy: string;
     accepted = false;
     constructor(from: string, to:string, date: string, seats: any,requestedBy: string ) {
         this.from = from;
         this.to =to;
-        this.seats = seats;
+        this.seatsRequested = seats;
         this.dateOfTrip =date;
         this.requestedBy = requestedBy;
     }

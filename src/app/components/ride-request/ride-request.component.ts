@@ -15,7 +15,7 @@ export class RideRequestComponent implements OnInit {
     from: new FormControl(''),
     to: new FormControl(''),
     dateOfTrip: new FormControl(''),
-    seats: new FormControl('')
+    seatsRequested: new FormControl('')
   })
   displaySuccessMessage = false;
 
