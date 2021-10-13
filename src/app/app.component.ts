@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { DbService } from './services/db.service';
+import { AuthService } from './services/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -7,9 +7,18 @@ import { DbService } from './services/db.service';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-  constructor(private db: DbService) { }
+  constructor(private auth: AuthService) {
+    this.auth.setAuthState();
+   }
 
   ngOnInit() {
+    this.auth.isUserAuthenticated$.subscribe( flag => {
+      if(flag) {
+        return;
+      } else {
+        this.auth.routeToSignIn()
+      }
+    })
   }
 
 

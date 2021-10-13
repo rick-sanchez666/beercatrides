@@ -41,6 +41,11 @@ export class DbService {
     return addDoc(collectionRef, payload);
   }
 
+  createDocWithID(collectionPath: string, payload: any) {
+    let docRef = doc(this.firestore, collectionPath)
+    return setDoc(docRef, payload);
+  }
+
   update(collectionPath: string, id: string, payload: any) {
     let path = `${collectionPath}/${id}`;
     let docRef = doc(this.firestore, path);

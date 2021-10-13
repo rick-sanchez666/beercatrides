@@ -1,0 +1,18 @@
+nav {
+    padding: 1rem;
+    background-color: #2a2e35 !important;
+}
+.nav-link {
+    color: rgb(178, 190, 205) ;
+    text-transform: uppercase;
+    font-weight: 800;
+}
+.nav-link:hover{
+    color: #fff ;
+}
+.logo, .login-sec {
+    min-width: 15vw;
+}
+.pages {
+    margin: 0 auto;
+}

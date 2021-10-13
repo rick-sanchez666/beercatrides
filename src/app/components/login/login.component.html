@@ -1,0 +1,18 @@
+<div class="signin-form">
+    <form class="mt-4" [formGroup]="signinForm" autocomplete="off">
+        <h1 class="text-center"> Signin </h1>
+        
+        <div class="col-md-6 col-xs-10 col-sm-10 m-auto mt-3">
+            <input class="form-control form-control-lg" autocomplete="off" formControlName="email" type="text" placeholder="Email">
+        </div>
+        <div class="col-md-6 col-xs-10 col-sm-10 m-auto mt-3">
+            <input class="form-control form-control-lg" autocomplete="off" formControlName="password" type="password" placeholder="Password">
+        </div>
+        <div class="col-md-6 col-xs-10 col-sm-10 m-auto mt-2">
+            <button (click)="submit()" class="btn btn-primary btn-lg w-100">Submit</button>
+        </div>
+    </form>
+</div>
+<div class="text-center m-4">
+    <h4>Don't have an account? <a routerLink="/signup">Signup here</a></h4>
+</div>

@@ -14,6 +14,12 @@ import { HeaderComponent } from './components/header/header.component';
 import { RideRequestComponent } from './components/ride-request/ride-request.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RidesComponent } from './components/rides/rides.component';
+import { LoginComponent } from './components/login/login.component';
+import { SignupComponent } from './components/signup/signup.component';
+import { SETTINGS as AUTH_SETTINGS } from '@angular/fire/compat/auth';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { SignupSuccessComponent } from './misc/signup-success/signup-success.component';
+import { GetVerifiedComponent } from './misc/get-verified/get-verified.component';
 
 const firebaseConfig = {
   apiKey: "AIzaSyAR5EPW82S9z4mj8xijtAt9Q_qtanA3EDI",
@@ -31,6 +37,10 @@ const firebaseConfig = {
     HeaderComponent,
     RideRequestComponent,
     RidesComponent,
+    LoginComponent,
+    SignupComponent,
+    SignupSuccessComponent,
+    GetVerifiedComponent,
   ],
   imports: [
     BrowserModule,
@@ -41,8 +51,10 @@ const firebaseConfig = {
     provideFirestore(() => getFirestore()),
     provideAuth(() => getAuth()),
     provideStorage(() => getStorage()),
+    BrowserAnimationsModule,
   ],
-  providers: [],
+  providers: [
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
