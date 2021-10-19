@@ -24,5 +24,9 @@ export class RidesComponent implements OnInit {
     console.log("send notification")
   }
 
+  requestFillIn(id:string) {
+    
+  }
+
 
 }

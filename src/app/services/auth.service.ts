@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { createUserWithEmailAndPassword, Auth, sendEmailVerification, signInWithEmailAndPassword, updateProfile, getAuth, onAuthStateChanged} from '@angular/fire/auth';
 import { Router } from '@angular/router';
-import { Observable, Subject } from 'rxjs';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { UserService } from './user.service';
 
@@ -10,10 +10,11 @@ import { UserService } from './user.service';
 })
 export class AuthService {
   
-  private isUserAuthenticated: Subject<boolean> =  new Subject();
+  private isUserAuthenticated =  new BehaviorSubject(false);
 
   isUserAuthenticated$ = this.isUserAuthenticated.asObservable();
   constructor( private fireAuth: Auth, private router: Router, private userService: UserService) { 
+    this.setAuthState();
   }
 
   async signupWithEmailandPassword(payload: any) {
@@ -58,9 +59,9 @@ export class AuthService {
   async signin(payload: any) {
     try {
       let signinResponse = await signInWithEmailAndPassword(this.fireAuth, payload.email, payload.password);
-      console.log(signinResponse);
       if(signinResponse.user.emailVerified){
-        this.router.navigate(['/'])
+        this.userService.fetchUserProfile(signinResponse.user.uid);
+        this.router.navigate(['/']);
       } else {
         this.router.navigate(['getverified']);
       }

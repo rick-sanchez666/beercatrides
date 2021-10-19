@@ -20,6 +20,7 @@ import { SETTINGS as AUTH_SETTINGS } from '@angular/fire/compat/auth';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SignupSuccessComponent } from './misc/signup-success/signup-success.component';
 import { GetVerifiedComponent } from './misc/get-verified/get-verified.component';
+import { MycarComponent } from './components/mycar/mycar.component';
 
 const firebaseConfig = {
   apiKey: "AIzaSyAR5EPW82S9z4mj8xijtAt9Q_qtanA3EDI",
@@ -41,6 +42,7 @@ const firebaseConfig = {
     SignupComponent,
     SignupSuccessComponent,
     GetVerifiedComponent,
+    MycarComponent,
   ],
   imports: [
     BrowserModule,
