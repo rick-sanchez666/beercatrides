@@ -1,34 +1,39 @@
 import { IUser } from "./user";
 
 export interface IRideRequest {
-    id: string;
+    id?: string;
     from: string;
     to: string;
     dateOfTrip: Date | string;
     seatsRequested: number | string;
-    requestedBy: string;
     accepted: boolean;
-    acceptedBy?: string;
-    seatsReserved?: string;
-    totalSeatsAvailable?:string;
-    passengers: any[];
-    bookingLog: []
+    requestedBy: string
 }
 
-
-
-export class RideRequest {
+export interface ITrip {
+    id?: string;
     from: string;
     to: string;
     dateOfTrip: Date | string;
-    seatsRequested: number | string;
-    requestedBy: string;
-    accepted = false;
-    constructor(from: string, to:string, date: string, seats: any,requestedBy: string ) {
-        this.from = from;
-        this.to =to;
-        this.seatsRequested = seats;
-        this.dateOfTrip =date;
-        this.requestedBy = requestedBy;
-    }
+    totalSeatsAvailable?:string;
+    acceptedBy: string;
+    requestedBy: boolean;
+    acceptedRideRequest: IAcceptedReq[];
+    pendingRideRequest: IAcceptedReq[];
+    bookingLog?: IReqLog[];
 }
+
+export interface IReqLog {
+    description?: string;
+    userId: string;
+    action: 'ACCEPTED BY' | 'NEW FILL IN REQUEST BY' | 'RIDE CANCELLED BY';
+}
+
+export interface IAcceptedReq {
+    userId: string;
+    noOfSeats: string | number;
+    status: 'accepted' | 'pending' | 'rejected';
+}
+
+
+

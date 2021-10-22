@@ -11,7 +11,8 @@ import { UserService } from './user.service';
 export class AuthService {
   
   private isUserAuthenticated =  new BehaviorSubject(false);
-
+  private isUserVerified = new BehaviorSubject(false);
+  isUserVerified$ = this.isUserVerified.asObservable();
   isUserAuthenticated$ = this.isUserAuthenticated.asObservable();
   constructor( private fireAuth: Auth, private router: Router, private userService: UserService) { 
     this.setAuthState();
@@ -76,6 +77,7 @@ export class AuthService {
       console.log("logging auth state", user)
       if(user) {
         this.isUserAuthenticated.next(true);
+        this.isUserVerified.next(user.emailVerified);
       } else {
         this.isUserAuthenticated.next(false);
       }

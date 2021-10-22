@@ -26,7 +26,7 @@ export class RideRequestComponent implements OnInit {
   }
 
   submit() {
-    const payload = {...this.requestForm.value, requestedBy: 'user1'}
+    const payload = {...this.requestForm.value}
     this.rideService.newRequest(payload)
     .then( data => {
       this.displaySuccessMessage = true;

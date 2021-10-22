@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { IRideRequest } from 'src/app/models/ride';
+import { map } from 'rxjs/operators';
+import { IRideRequest, ITrip } from 'src/app/models/ride';
 import { RideRequestService } from 'src/app/services/ride.service';
 
 @Component({
@@ -8,24 +9,33 @@ import { RideRequestService } from 'src/app/services/ride.service';
   styleUrls: ['./rides.component.scss']
 })
 export class RidesComponent implements OnInit {
-  rides: Array<IRideRequest> = [];
+  rides: any[] = [];
   constructor(private rideService: RideRequestService) { }
 
   ngOnInit(): void {
-    this.rideService.getAllRideRequest().subscribe((data: any[]) => {
+    this.rideService.getAllRideRequest()
+    .subscribe((data: any[]) => {
       this.rides = data;
     })
   }
 
-  async accept(id:string) {
+  accept(id:string) {
     let req = this.rides.filter( r => r.id ==id)[0];
-    let res = await this.rideService.acceptRide(req);
-    console.log(res);
-    console.log("send notification")
+   this.rideService.createTrip(req)
+   .then( res => {
+    this.rideService.updateRequestAcceptance(req);
+   })
+   .catch( err => {
+     console.log(err)
+   })
   }
 
   requestFillIn(id:string) {
-    
+    let req = this.rides.filter( r => r.id ==id)[0];
+    this.rideService.requestFillin(req)
+    .then( res => {
+      console.log("ride request initiated")
+    })
   }
 
 

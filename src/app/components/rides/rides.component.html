@@ -10,9 +10,7 @@
                 <div class="card-body">
                   <h5 class="card-title"></h5>
                   <p class="card-text">No of Passengers : {{r.seatsRequested}}</p>
-                  <p class="card-text"*ngIf="r.totalSeatsAvailable" >No of Seats  : {{r.totalSeatsAvailable}}</p>
                   <a (click)="accept(r.id)" class="btn btn-success btn-md" *ngIf="!r.accepted">Accept</a>
-                  <a (click)="requestFillIn(r.id)" class="btn btn-success btn-md" *ngIf="r.accepted && r.totalSeatsAvailable != r.seatsReserved">Request Fill in</a>
                 </div>
                 <div class="card-footer text-muted border-0">
                   {{r.dateOfTrip | date: 'dd-MMM-YYYY: HH:mm'}}
